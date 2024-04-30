@@ -39,3 +39,18 @@ class PrimeIterator(Iterable):
 iter = PrimeIterator(9)
 for elem in iter:
     print(elem)
+
+
+
+def prime_generator(n):
+    number = 2
+    generated_number = 0
+    while generated_number != n:
+        if is_prime(number):
+            yield number  # yield salveaza in memorie, dar nu iese din functie.
+            generated_number += 1
+        number += 1
+
+gen = prime_generator(100000)
+for elem in gen:
+    print(elem)
