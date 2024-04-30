@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "title": "Complete project proposal",
+        "description": "Write and submit the project proposal for review.",
+        "due_date": "2024-05-15",
+        "priority": "High",
+        "status": "Incomplete"
+    },
+    {
+        "id": 2,
+        "title": "Prepare presentation slides",
+        "description": "Create slides for the project presentation.",
+        "due_date": "2024-05-20",
+        "priority": "Medium",
+        "status": "Complete"
+    },
+    {
+        "id": 3,
+        "title": "Review project documentation",
+        "description": "Review and finalize project documentation.",
+        "due_date": "2024-05-25",
+        "priority": "Low",
+        "status": "Incomplete"
+    }
+]

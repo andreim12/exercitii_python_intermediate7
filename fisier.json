@@ -1,0 +1,21 @@
+{
+  "haine": [
+    {
+      "id": 0,
+      "tip": "hanorac",
+      "cantitate": 15
+    },
+    {
+       "id": 1,
+      "tip": "tricou",
+      "cantitate": 20
+    }],
+
+  "incaltaminte": [
+    {
+      "id": 0,
+        "tip": "adidas",
+        "cantitate": 5
+    }
+  ]
+}
