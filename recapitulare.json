@@ -1,0 +1,10 @@
+{
+    "class_name": "Person",
+    "attributes": [
+        {"name": "name", "type": "str"},
+        {"name": "age", "type": "int"}
+    ],
+    "methods": [
+        {"name": "say_hello", "args": [], "return_type": "None", "body": "print('Hello, I am ' + self.name)"}
+    ]
+}

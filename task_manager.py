@@ -11,6 +11,7 @@
 import json
 import os
 from datetime import datetime
+from collections.abc import Iterable
 
 TASKS_FILE = 'tasks.json'
 
@@ -21,6 +22,33 @@ def log_operation(func):
             log_file.write(f"{datetime.now()} - {func.__name__} - {args[1:]}\n")
         return result
     return wrapper
+
+class JsonIterable(Iterable):
+
+    def __init__(self, file_path):
+        self.file_path = file_path
+
+    def __iter__(self):
+        with open(self.file_path, 'r') as file:
+            self.tasks = json.load(file)
+        self.index = 0
+        return self
+
+    def __next__(self):
+        if not hasattr(self, 'tasks'):
+            raise StopIteration
+        elif self.index < len(self.tasks):
+            task = self.tasks[self.index]  # [] -> operator de indexare
+            self.index += 1
+            return task
+        else:
+            raise StopIteration
+
+    def __getitem__(self, index):
+        with open(self.file_path, 'r') as file:
+            tasks = json.load(file)
+        return tasks[index]
+
 
 class TaskManager:
 
@@ -96,14 +124,17 @@ class TaskManager:
 
 def main():
     t1 = TaskManager()
+    taskuri = JsonIterable(TASKS_FILE)
+    print(sum(1 for _ in taskuri))
+    print(taskuri[0])
     while True:
         print("1. Add Task")
         print("2. Update Task")
         print("3. Delete Task")
         print("4. View Tasks")
         print("5. Exit")
-        choice = int(input("Alege ceva: "))
-        if choice == 1:
+        choice = input("Alege ceva: ")
+        if choice == '1':
             title = input("Enter title: ")
             description = input("Enter task description: ")
             due_date = input("Enter due date (YYYY-MM-DD): ")
@@ -121,12 +152,12 @@ def main():
             priority = input("Enter priority (High/Medium/Low): ")
             status = input("Enter status (Complete/Incomplete): ")
             t1.update_task(index, title, description, due_date, priority, status)
-        elif choice == 3:
+        elif choice == '3':
             index = int(input("Enter the index of the task: ")) - 1
             t1.delete_task(index)
-        elif choice == 4:
+        elif choice == '4':
             t1.view_tasks()
-        elif choice == 5:
+        elif choice == '5':
             break
         else:
             print("Try again!")
